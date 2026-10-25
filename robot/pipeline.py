@@ -173,7 +173,7 @@ def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool 
     shutil.copy(caps["hi"], settings.OUT / f"{eid}.hi.srt")
     if caps.get("en"):
         shutil.copy(caps["en"], settings.OUT / f"{eid}.en.srt")
-    times = [b["from"] / timeline.FPS + 2 for b in plan.reveal_beats][:7] + [secs * 0.92]
+    times = [(b["from"] + 0.8 * (b["to"] - b["from"])) / timeline.FPS for b in plan.reveal_beats][:7] + [secs * 0.9]
     sheet = render.contact_sheet(mp4, [1.5] + times, settings.OUT / f"{eid}-sheet.jpg")
     meta = ep.get("meta") or {}
     title = seo.clean_title(meta.get("title", topic.get("title_en", "")))

@@ -55,7 +55,7 @@ const CharOnStage: React.FC<{
         bottom,
         width: w,
         height,
-        filter: dim ? "saturate(0.85) brightness(0.96)" : undefined,
+        opacity: dim ? 0.93 : 1,
         transform: `translateY(${(1 - enter) * 30}px)`,
       }}
     >
