@@ -22,6 +22,11 @@ def has_pending_short(d: dict) -> bool:
 def main() -> str:
     d = L.load(apply=False)
     cfg = settings.config()["schedule"]
+    # wait quietly until setup is finished (an AI key and the YouTube login)
+    ai = any(settings.env(p["key_env"]) for p in settings.config()["llm"]["providers"])
+    yt = all(settings.env(k) for k in ("YT_CLIENT_ID", "YT_CLIENT_SECRET", "YT_REFRESH_TOKEN"))
+    if not (ai and yt):
+        return "none"
     if schedule.uploads_today(d) >= int(cfg.get("max_uploads_per_day", 3)):
         return "none"
     if schedule.next_due(d, "long"):

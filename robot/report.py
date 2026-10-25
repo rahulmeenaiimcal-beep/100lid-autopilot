@@ -105,6 +105,8 @@ def run(d: dict) -> str:
     dated = sorted(p for p in folder.glob("20*.md"))
     for p in dated[:-20]:
         p.unlink()
+    if not youtube.ready():
+        return md
     n = review.open_issue(f"📊 Channel report — {date.today():%d %b %Y}", md, ["report"])
     if n:
         review.close_open("report", keep=n)
