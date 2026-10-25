@@ -5,6 +5,7 @@ name: Autopilot
 #   Every hour at :17  -> is a video due in the next ~2 days? If yes, make + upload it.
 #   Every day 21:41    -> (3:11 am IST) read YouTube numbers, learn, post pinned comments
 #   Every 3 days 01:11 -> (6:41 am IST) the plain-language report (sent to you as an issue/email)
+#   20th of each month 04:23 -> (9:53 am IST) next month's recording list for your own clips
 # You can also run it by hand: Actions tab -> Autopilot -> Run workflow.
 # ---------------------------------------------------------------
 on:
@@ -12,12 +13,13 @@ on:
     - cron: "17 * * * *"
     - cron: "41 21 * * *"
     - cron: "11 1 */3 * *"
+    - cron: "23 4 20 * *"
   workflow_dispatch:
     inputs:
       job:
         description: "What should the robot do?"
         type: choice
-        options: [check, sample, auto, long, short, stats, report]
+        options: [check, sample, sample-clip, auto, long, short, stats, report, plan-month]
         default: check
       upload:
         description: "Upload to YouTube? (untick = only make the video file to download)"
@@ -60,13 +62,15 @@ jobs:
             case "${{ github.event.schedule }}" in
               "41 21 * * *") JOB=stats ;;
               "11 1 */3 * *") JOB=report ;;
+              "23 4 20 * *") JOB=plan-month ;;
               *) JOB=auto; WHAT=$(python -m robot.due); [ "$WHAT" != "none" ] && HEAVY=yes ;;
             esac
             FLAG=""
           else
             JOB="${{ inputs.job }}"
             if [ "${{ inputs.upload }}" = "true" ]; then FLAG="--upload"; else FLAG="--no-upload"; fi
-            case "$JOB" in sample|auto|long|short) HEAVY=yes ;; esac
+            case "$JOB" in sample|sample-clip|auto|long|short) HEAVY=yes ;; esac
+            case "$JOB" in stats|report|plan-month) FLAG="" ;; esac
             [ "$JOB" = "auto" ] && FLAG=""
           fi
           echo "job=$JOB" >> "$GITHUB_OUTPUT"
