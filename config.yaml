@@ -52,7 +52,7 @@ cast:
     topics: ["scheme", "law", "economy", "general"]
     look: { skin: "#c98b5e", hair: "#f2f2f2", hairStyle: "bald_sides", beard: "white_full", mustache: true, glasses: true, top: "#8d5524", topStyle: "kurta", accent: "#e9c46a", accessory: "shawl", bindi: false, height: 1.0 }
     voice:
-      edge: { voice: "hi-IN-MadhurNeural", pitch: "-8Hz", rate: "-4%" }
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "-8Hz", rate: "+6%" }
       parler: { speaker: "Rohit", description: "Rohit speaks in a deep, calm and warm voice at a moderate pace. The recording is very clear with no background noise." }
   meera:
     name_hi: "मीरा मैम"
@@ -62,7 +62,7 @@ cast:
     topics: ["banking", "rbi", "digital", "economy"]
     look: { skin: "#b9784f", hair: "#2b1b17", hairStyle: "bun", beard: "none", mustache: false, glasses: false, top: "#1d3557", topStyle: "blazer", accent: "#e63946", accessory: "id_badge", bindi: true, height: 0.96 }
     voice:
-      edge: { voice: "hi-IN-SwaraNeural", pitch: "+0Hz", rate: "+0%" }
+      edge: { voice: "hi-IN-SwaraNeural", pitch: "+0Hz", rate: "+8%" }
       parler: { speaker: "Divya", description: "Divya speaks in a confident, clear and friendly voice at a moderate pace. The recording is very clear with no background noise." }
   chotu:
     name_hi: "छोटू"
@@ -72,7 +72,7 @@ cast:
     topics: ["any"]
     look: { skin: "#a8693f", hair: "#1b1b1b", hairStyle: "spiky", beard: "none", mustache: false, glasses: false, top: "#ffd23f", topStyle: "tshirt", accent: "#ef476f", accessory: "backpack", bindi: false, height: 0.9 }
     voice:
-      edge: { voice: "hi-IN-MadhurNeural", pitch: "+16Hz", rate: "+6%" }
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "+16Hz", rate: "+13%" }
       parler: { speaker: "Aman", description: "Aman speaks in an energetic, curious, slightly high-pitched voice at a fast pace. The recording is very clear with no background noise." }
   ramesh:
     name_hi: "रमेश काका"
@@ -82,7 +82,7 @@ cast:
     topics: ["farmer", "rural", "agriculture", "loan", "insurance"]
     look: { skin: "#8d5a3b", hair: "#1b1b1b", hairStyle: "pagdi", pagdi: "#e85d04", beard: "stubble", mustache: true, glasses: false, top: "#f8f9fa", topStyle: "kurta", accent: "#2a9d8f", accessory: "gamcha", bindi: false, height: 1.0 }
     voice:
-      edge: { voice: "hi-IN-MadhurNeural", pitch: "-14Hz", rate: "-6%" }
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "-14Hz", rate: "+3%" }
       parler: { speaker: "Rohit", description: "Rohit speaks in a low-pitched, rustic and slow voice. The recording is very clear with no background noise." }
   sunita:
     name_hi: "सुनीता दीदी"
@@ -92,7 +92,7 @@ cast:
     topics: ["women", "savings", "girl", "shg", "health", "pension"]
     look: { skin: "#9b6142", hair: "#1b1b1b", hairStyle: "long_braid", beard: "none", mustache: false, glasses: false, top: "#2a9d8f", topStyle: "saree", accent: "#ffd23f", accessory: "none", bindi: true, height: 0.94 }
     voice:
-      edge: { voice: "hi-IN-SwaraNeural", pitch: "-8Hz", rate: "-4%" }
+      edge: { voice: "hi-IN-SwaraNeural", pitch: "-8Hz", rate: "+5%" }
       parler: { speaker: "Rani", description: "Rani speaks in a warm, gentle voice at a moderate pace. The recording is very clear with no background noise." }
   sharmaji:
     name_hi: "शर्मा जी"
@@ -102,7 +102,7 @@ cast:
     topics: ["msme", "business", "loan", "digital", "tax"]
     look: { skin: "#c48a62", hair: "#3b2a20", hairStyle: "side_part", beard: "none", mustache: true, glasses: true, top: "#90be6d", topStyle: "shirt", accent: "#f8961e", accessory: "apron", bindi: false, height: 0.98 }
     voice:
-      edge: { voice: "hi-IN-MadhurNeural", pitch: "+4Hz", rate: "+2%" }
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "+4Hz", rate: "+10%" }
       parler: { speaker: "Aman", description: "Aman speaks in a cheerful, chatty, medium-pitched voice at a moderate pace. The recording is very clear with no background noise." }
 
 # ---------------------------------------------------------------------
@@ -127,7 +127,7 @@ topic_mix:
 # ---------------------------------------------------------------------
 video:
   long_minutes: [8, 12]                # target length of long videos
-  long_words: [1300, 1800]             # spoken Hindi words for that length
+  long_words: [1400, 1950]             # spoken Hindi words for that length (voices speak ~10% faster than normal)
   short_seconds: [40, 55]
   short_words: [90, 125]
   quiz_questions: 5

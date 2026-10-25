@@ -61,8 +61,9 @@ def write_srt(c: list[tuple[float, float, str]], path: Path) -> Path:
     return path
 
 
-def translate(lines: list[str]) -> list[str]:
-    """Hindi → natural English, keeping exam terms. Falls back to Hindi on failure."""
+def translate(lines: list[str]) -> list[str] | None:
+    """Hindi → natural English, keeping exam terms. Returns None if it can't be done
+    (so a Hindi file is never uploaded as "English")."""
     out: list[str] = []
     for i in range(0, len(lines), 60):
         batch = lines[i : i + 60]
@@ -74,15 +75,23 @@ def translate(lines: list[str]) -> list[str]:
         try:
             res, _ = llm.chat("You translate subtitles accurately.", user, want_json=True, temperature=0.2, max_tokens=8000)
             got = [str(x) for x in (res or {}).get("lines", [])]
-            out += got if len(got) == len(batch) else batch
+            if len(got) != len(batch):
+                return None
+            out += got
         except llm.LLMError:
-            out += batch
-    return out
+            return None
+    # sanity check: real English has almost no Devanagari letters
+    deva = sum(1 for t in out for ch in t if "\u0900" <= ch <= "\u097F")
+    total = sum(len(t) for t in out) or 1
+    return out if deva / total < 0.1 else None
 
 
 def make(plan: Plan, folder: Path, english: bool = True) -> dict[str, Path]:
     files = {"hi": write_srt(cues(plan), folder / "captions.hi.srt")}
     if english:
         en = translate([c.text for _, c in plan.voice])
-        files["en"] = write_srt(cues(plan, en), folder / "captions.en.srt")
+        if en:
+            files["en"] = write_srt(cues(plan, en), folder / "captions.en.srt")
+        else:
+            print("English subtitles skipped: translation not available")
     return files

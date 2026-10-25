@@ -34,9 +34,9 @@ class Plan:
 
 VoiceFn = Callable[[str, str], Clip]
 
-GAP_SAME = 0.22     # pause between two lines of the same speaker (seconds)
-GAP_SWITCH = 0.38   # pause when the speaker changes
-CHAPTER_SEC = 1.7
+GAP_SAME = 0.12     # pause between two lines of the same speaker (seconds)
+GAP_SWITCH = 0.26   # pause when the speaker changes
+CHAPTER_SEC = 1.25
 QUIZ_COUNT = 5
 
 
@@ -232,7 +232,7 @@ class Builder:
             start = self.t
             s0, s1, _ = self.say(ln["speaker"], ln["text"])
             if i == len(lines) - 1:
-                self.pause(0.25)
+                self.pause(0.15)
             cam = "wide" if i == 0 or i % 3 == 2 else ("close" if ln["speaker"] != prev else "push")
             stick = None
             if ln.get("onscreen"):
@@ -269,7 +269,7 @@ class Builder:
                 if ix not in reveal:
                     reveal[ix] = (s0 - start) + 4 + j * 14
                     self.sfx.append((s0 + 4 + j * 14, "pop"))
-        self.pause(0.45)
+        self.pause(0.3)
         dur = self.t - start
         rv = []
         for ix in range(n_items):
@@ -297,7 +297,7 @@ class Builder:
         ans = q["options"][q["answer"]] if 0 <= q.get("answer", 0) < len(q["options"]) else ""
         explain = q.get("explain") or ""
         self.say(presenter, f"सही जवाब है {letters[q['answer']]}: {ans}। {explain}".strip())
-        self.pause(0.5)
+        self.pause(0.35)
         self.add_shot(
             start,
             "quiz",
@@ -313,7 +313,7 @@ class Builder:
         for p in points:
             s0, _, _ = self.say(presenter, p)
             rv.append(s0 - start)
-        self.pause(0.6)
+        self.pause(0.5)
         self.add_shot(start, "recap", title="Quick Recap · याद रखें", recap=points, reveal=rv, presenter=presenter)
 
     def block_outro(self, outro: dict) -> None:
