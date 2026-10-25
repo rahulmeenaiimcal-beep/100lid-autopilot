@@ -30,6 +30,7 @@ LABELS = {
     "rejected": ("b60205", "Kept private"),
     "report": ("1d76db", "3-day performance report"),
     "problem": ("d93f0b", "Something needs your attention"),
+    "recording": ("5319e7", "Your monthly list of clips to record"),
 }
 
 

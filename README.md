@@ -16,6 +16,7 @@ Every hour it checks: *"Is a video due in the next 2 days?"* If yes, it:
 7. **Adds original background music** (made by code, so there are never copyright claims), sound effects, Hindi + English subtitles, chapters, a click-worthy thumbnail, an SEO title, a description and tags.
 8. **Uploads it as PRIVATE** and **emails you** (through a GitHub issue). Reply **ok**, **now** or **no**.
 9. **Learns** from YouTube's numbers every day, and sends you a plain-language **report every 3 days**.
+10. **Around the 20th of each month** it emails you next month's topics with a 1-minute tip script for each, for **you** to record. Your clips go into their own videos automatically (see `docs/RECORDING.md`).
 
 **Schedule:** 3 long videos a week (Tue & Thu 6 pm, Sat 11 am) + 1 Short every day at 8 pm, India time.
 
@@ -37,6 +38,7 @@ Topics are in **`topics/bank.yaml`**.
 | `topics/bank.yaml` | The list of topics |
 | `docs/SETUP.md` | One-time setup guide |
 | `docs/STRATEGY.md` | The month-1 plan and what to check after a month |
+| `docs/RECORDING.md` | How to record and upload your own clips |
 | `robot/` | The robot's Python code |
 | `video/` | The animation project (Remotion) |
 | `samples/ssy_episode.json` | A hand-written example episode (the style guide for the AI) |

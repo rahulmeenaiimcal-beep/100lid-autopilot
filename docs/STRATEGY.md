@@ -42,6 +42,6 @@ The robot's 3-day reports track these. Don't expect big numbers yet: search traf
 
 **Monetization maths:** 4,000 hours a year ≈ **330 watch hours a month** ≈ 5,700 long-video views a month at ~3.5 minutes each. A realistic aim is to reach that pace in 4–6 months as the library grows.
 
-## Month 2 idea: your own clips
-Once a month, the robot writes 12 short topic-specific scripts ("Rahul Sir's Exam Tip", 60–90 s, one per upcoming topic). You record them all in one sitting with your face and voice, and the robot places each clip into its own video.
-Avoid reusing the same generic clips across many videos: that is exactly the "repetitive" pattern YouTube refuses to pay for. A short personal intro and outro used on every video is fine as branding.
+## Month 2: your own clips (built in)
+From month 2 the robot sends you a **recording list around the 20th**: next month's topics in order, each with a ~1-minute "Rahul Sir's Exam Tip" script (memory trick, most-asked fact, common mistake). You record them in one sitting and upload them; each clip goes into its own video, before the quiz, with exact subtitles from your speech. An optional intro and outro, recorded once, are used on every video as branding. See `docs/RECORDING.md`.
+Each tip clip is used only once, on purpose: the same clips repeated across many videos is exactly the "repetitive" pattern YouTube refuses to pay for.

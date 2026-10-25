@@ -169,6 +169,16 @@ llm:
       prefer: ":free"
   fact_check: true                     # a second AI checks every fact against the research notes
 
+# ---------------------------------------------------------------------
+# YOUR OWN CLIPS. Around the 20th of every month the robot emails you next
+# month's topics with a 1-minute tip script for each. Record them on your phone
+# and upload them (see docs/RECORDING.md). Each clip is used in its own video.
+# ---------------------------------------------------------------------
+clips:
+  presenter_name: "Rahul Sir"
+  plan_day: 20                         # day of the month the recording list is sent
+  whisper_model: "small"               # speech-to-text for exact subtitles of your clips
+
 tts:
   # auto   = try the open-source Indic Parler voices; if too slow or failing, use the Microsoft voices
   # edge   = Microsoft voices only (fastest)

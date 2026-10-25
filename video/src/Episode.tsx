@@ -6,6 +6,7 @@ import { FontGate } from "./fonts";
 import {
   BoardLayout,
   ChapterLayout,
+  ClipLayout,
   Ctx,
   HookLayout,
   OutroLayout,
@@ -31,6 +32,8 @@ const ShotView: React.FC<{ ep: EpisodeProps; shot: Shot }> = ({ ep, shot }) => {
       return <RecapLayout ctx={ctx} />;
     case "outro":
       return <OutroLayout ctx={ctx} />;
+    case "clip":
+      return <ClipLayout ctx={ctx} />;
     default:
       return <StageLayout ctx={ctx} />;
   }

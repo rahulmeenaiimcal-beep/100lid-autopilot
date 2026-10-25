@@ -50,7 +50,7 @@ export type QuizQ = { q: string; options: string[]; answer: number; explain?: st
 export type Shot = {
   from: number;
   duration: number;
-  layout: "hook" | "stage" | "board" | "chapter" | "quiz" | "recap" | "outro";
+  layout: "hook" | "stage" | "board" | "chapter" | "quiz" | "recap" | "outro" | "clip";
   setting?: string;
   chars?: StageChar[];
   presenter?: string; // character shown in the corner on board/quiz/recap layouts
@@ -63,6 +63,7 @@ export type Shot = {
   recap?: string[];
   nextTitle?: string;
   camera?: "wide" | "close" | "push";
+  clip?: { file: string; w: number; h: number; label: string; kind: "tip" | "intro" | "outro" };
 };
 
 export type Caption = { from: number; to: number; text: string };

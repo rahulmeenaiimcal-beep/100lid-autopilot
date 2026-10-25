@@ -128,7 +128,7 @@ def _upload_and_review(d: dict, rec: dict, mp4: Path, title: str, desc: str, tag
 
 
 # ------------------------------------------------------------------ long video
-def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool = False) -> dict:
+def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool = False, test_clip: bool = False) -> dict:
     t0 = time.time()
     settings.ensure_dirs()
     if sample:
@@ -164,6 +164,17 @@ def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool 
                           "shorts_done": [], "long_video_id": None, "title": ep.get("meta", {}).get("title", "")}
     work = settings.WORK / eid
     work.mkdir(parents=True, exist_ok=True)
+    tip = intro = outro = None
+    try:
+        from . import clips
+        tip, intro, outro = clips.for_topic(d, topic["id"], eid)
+        if test_clip:
+            tip = clips.synthetic_test_clip(eid, "दोस्तों, Sukanya Samriddhi को याद रखने का आसान तरीका: 15 साल जमा, 21 साल में पैसा।",
+                                            "Friends, an easy way to remember Sukanya Samriddhi: deposit for 15 years, get the money at 21.")
+        ep["_tip_clip"], ep["_intro_clip"], ep["_outro_clip"] = tip, intro, outro
+        log(f"your clips: tip={'yes' if tip else 'no'}, intro={'yes' if intro else 'no'}, outro={'yes' if outro else 'no'}")
+    except Exception as e:
+        log(f"clips skipped: {e}")
     log("recording voices")
     voices = tts.Voices(settings.WORK / "voice")
     plan = timeline.build_long(ep, voices)
@@ -202,6 +213,11 @@ def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool 
         notes_for_you += [f"Fact-check doubt: {u}" for u in fc["unresolved"][:6]]
     if problems:
         notes_for_you += [f"Script note: {p}" for p in problems]
+    if tip:
+        notes_for_you.append(f"Your recorded tip ({tip['plan_file']}) is in this video, right before the quiz.")
+        if upload:
+            from . import clips as _c
+            _c.mark_used(tip, eid)
     if not en_ok:
         notes_for_you.append("English subtitles could not be made this time (the AI translator did not answer), so this video has Hindi subtitles only.")
     if fc.get("fixed"):

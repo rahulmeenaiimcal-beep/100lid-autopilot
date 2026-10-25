@@ -85,6 +85,16 @@ def choose(ledger: dict, skip: set[str] | None = None) -> dict:
     ca = current_affairs_topic(ledger)
     if ca and not (skip and ca["id"] in skip):
         return ca
+    # this month's plan (made around the 20th of last month, with your recorded tips)
+    from .clips import load_plan, month_key
+    plan = load_plan(month_key())
+    if plan:
+        made = {e.get("topic_id") for e in ledger.get("episodes", {}).values() if not e.get("test")}
+        for tid in plan.get("order") or []:
+            if tid not in made and not (skip and tid in skip):
+                t = next((x for x in bank() if x["id"] == tid), None)
+                if t:
+                    return t
     used = _used(ledger) | (skip or set())
     mix = settings.config().get("topic_mix", {})
     counts = _month_counts(ledger)

@@ -142,7 +142,7 @@ class Builder:
 
     # ---------------------------------------------------------------- audio helpers
     def _use(self, cid: str) -> None:
-        if cid and cid not in self.cast_ids and cid in settings.cast():
+        if cid and cid not in self.cast_ids and cid in settings.cast():  # "_presenter" (your clips) is not a cartoon
             self.cast_ids.append(cid)
 
     def say(self, speaker: str, text: str, en: str = "") -> tuple[int, int, Clip]:
@@ -346,6 +346,30 @@ class Builder:
         self.pause(1.6)
         self.add_shot(start, "outro", nextTitle=outro.get("next_title"))
 
+    def block_clip(self, info: dict, kind: str) -> None:
+        """Your own recorded clip (tip / intro / outro), with exact subtitles."""
+        if not info or not info.get("wav") or info.get("duration", 0) <= 0:
+            return
+        self.t += f(0.25)
+        start = self.t
+        n = max(1, f(info["duration"]))
+        clip = Clip(speaker="_presenter", text=info.get("text", ""), duration=info["duration"], amp=[0.0] * n, path=info["wav"], en=info.get("en", ""))
+        self.plan_voice.append((start, clip))
+        if len(self.amp) < start + n + 1:
+            self.amp.extend([0] * (start + n + 1 - len(self.amp)))
+        for sg in info.get("segments") or []:
+            a, b = start + f(sg["start"]), start + f(sg["end"])
+            if self.burn_en and sg.get("en"):
+                self.subs.extend(sub_chunks(sg["en"], a, b))
+            if self.vertical and sg.get("hi"):
+                self.captions.extend(caption_chunks(sg["hi"], a, b))
+        self.t = start + n + f(0.2)
+        self.last_speaker = None
+        name = settings.config().get("clips", {}).get("presenter_name", "Rahul Sir")
+        label = {"tip": f"💡 {name} का Exam Tip", "intro": name, "outro": name}.get(kind, name)
+        self.add_shot(start, "clip", clip={"file": info["file"], "w": info.get("w", 1920), "h": info.get("h", 1080), "label": label, "kind": kind})
+        self.beats.append({"kind": f"clip_{kind}", "from": start, "to": self.t, "where": kind})
+
     def teacher(self) -> str:
         c = self.ep.get("cast") or {}
         return c.get("teacher") or "guruji"
@@ -354,6 +378,8 @@ class Builder:
     def build_long(self) -> Plan:
         ep = self.ep
         self.block_hook(ep["hook"])
+        if ep.get("_intro_clip"):
+            self.block_clip(ep["_intro_clip"], "intro")
         ch = 0
         for sec in ep.get("sections") or []:
             if sec.get("chapter"):
@@ -363,6 +389,8 @@ class Builder:
                 self.block_board(sec)
             else:
                 self.block_stage(sec)
+        if ep.get("_tip_clip"):
+            self.block_clip(ep["_tip_clip"], "tip")
         quiz = ep.get("quiz") or []
         if quiz:
             ch += 1
@@ -373,6 +401,8 @@ class Builder:
             ch += 1
             self.block_chapter("Recap", ch)
             self.block_recap(ep["recap"], self.teacher())
+        if ep.get("_outro_clip"):
+            self.block_clip(ep["_outro_clip"], "outro")
         if ep.get("outro"):
             self.block_outro(ep["outro"])
         return self.finish(title=ep.get("meta", {}).get("title", ""))

@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate } from "remotion";
+import { interpolate, OffthreadVideo, staticFile } from "remotion";
 import { CharacterLook, EpisodeProps, Shot, StageChar, Talk } from "../types";
 import { C, FONT_BODY, FONT_HEAD, ITEM_COLORS, pick } from "../theme";
 import { clamp, ease, pop } from "../lib/anim";
@@ -491,6 +491,71 @@ export const OutroLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
           <Character look={ep.cast[id]} emotion="happy" gesture="wave" frame={ctx.abs} seed={id} height={pH} facing={i === 0 ? 1 : -1} talking={talkerAt(ep.talk, ctx.abs) === id} mouth={talkerAt(ep.talk, ctx.abs) === id ? ampAt(ep.amp, ctx.abs) : 0} />
         </div>
       ))}
+    </div>
+  );
+};
+
+// --------------------------------------------------------------- YOUR OWN RECORDED CLIP
+export const ClipLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
+  const { shot, W, H, vertical, fps } = ctx;
+  const c = shot.clip!;
+  const u = vertical ? W / 1080 : W / 1920;
+  const band = subBand(ctx);
+  // fit the video inside the free area, keeping its shape (works for landscape or portrait phone videos)
+  const top = vertical ? H * 0.12 : H * 0.06;
+  const availW = W * (vertical ? 0.94 : 0.86);
+  const availH = vertical ? H * 0.5 : H - top - band - H * 0.06;
+  const ar = (c.w || 16) / (c.h || 9);
+  let vw = availW;
+  let vh = vw / ar;
+  if (vh > availH) {
+    vh = availH;
+    vw = vh * ar;
+  }
+  const x = (W - vw) / 2;
+  const enter = pop(ctx.f, fps, 0, 16);
+  const tag = pop(ctx.f, fps, 10, 12);
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+      <Setting name="studio" width={W} height={H} frame={ctx.abs} />
+      <div
+        style={{
+          position: "absolute",
+          left: x,
+          top,
+          width: vw,
+          height: vh,
+          borderRadius: 28 * u,
+          overflow: "hidden",
+          border: `${8 * u}px solid ${C.ink}`,
+          boxShadow: `0 ${16 * u}px 0 rgba(0,0,0,0.2)`,
+          transform: `scale(${0.92 + 0.08 * enter})`,
+          background: "#000",
+        }}
+      >
+        <OffthreadVideo src={staticFile(c.file)} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </div>
+      {c.label && (
+        <div
+          style={{
+            position: "absolute",
+            left: x + 24 * u,
+            top: top + vh - 96 * u,
+            transform: `translateX(${(1 - tag) * -60 * u}px)`,
+            opacity: tag,
+            background: C.yellow,
+            color: C.ink,
+            fontFamily: FONT_HEAD,
+            fontWeight: 800,
+            fontSize: 44 * u,
+            padding: `${6 * u}px ${24 * u}px`,
+            borderRadius: 14 * u,
+            border: `${5 * u}px solid ${C.ink}`,
+          }}
+        >
+          {c.label}
+        </div>
+      )}
     </div>
   );
 };

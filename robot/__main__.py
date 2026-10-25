@@ -4,6 +4,7 @@
   sample           make the hand-written sample video + one Short (add --upload to upload)
   auto             make whatever is due next (used by the hourly timer)
   long / short     make one now (add --no-upload to only make the file)
+  plan-month       pick next month's topics and email you the clips to record
   reply            handle your reply on a review issue (used automatically)
   stats            read YouTube numbers, learn, post pinned comments
   report           write the 3-day report
@@ -48,6 +49,7 @@ def main() -> int:
     ap.add_argument("--upload", action="store_true")
     ap.add_argument("--issue", type=int, default=0)
     ap.add_argument("--text", default="")
+    ap.add_argument("--month", default="", help="YYYY-MM for plan-month (default: next month)")
     a = ap.parse_args()
     settings.ensure_dirs()
 
@@ -59,8 +61,11 @@ def main() -> int:
         if a.cmd == "check":
             from .check import run
             return run()
-        if a.cmd == "sample":
-            pipeline.make_long(d, None, upload=a.upload, sample=True)
+        if a.cmd in ("sample", "sample-clip"):
+            pipeline.make_long(d, None, upload=a.upload, sample=True, test_clip=a.cmd == "sample-clip")
+            if a.cmd == "sample-clip":
+                L.save(d)
+                return 0
             L.save(d)
             pipeline.make_short(d, None, upload=a.upload)
         elif a.cmd in ("auto", "long", "short"):
@@ -78,6 +83,9 @@ def main() -> int:
                 pipeline.make_long(d, slot, upload=not a.no_upload)
             else:
                 pipeline.make_short(d, slot, upload=not a.no_upload)
+        elif a.cmd == "plan-month":
+            from . import clips
+            print(clips.plan_month(d, a.month or None))
         elif a.cmd == "reply":
             print(pipeline.handle_reply(d, a.issue, a.text))
             return 0  # the decision is saved as its own small file; the ledger is untouched
