@@ -1,0 +1,24 @@
+{
+ "videos": [],
+ "episodes": {},
+ "playlists": {},
+ "learning": {
+  "weights": {
+   "series": {},
+   "teacher": {},
+   "palette": {},
+   "layout": {},
+   "emotion": {},
+   "short_kind": {}
+  },
+  "devices": {},
+  "judged_long": 0,
+  "judged_short": 0,
+  "updated": "2026-10-25T01:35:12+00:00"
+ },
+ "pending_comments": [],
+ "archive": {
+  "videos": 0
+ },
+ "last_report": "2026-10-25T01:35:15+00:00"
+}
