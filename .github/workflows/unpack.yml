@@ -1,0 +1,34 @@
+name: Unpack uploaded update
+
+# Updates to the robot can be uploaded as one file (incoming/*.tar.gz).
+# This unpacks it into the repository and removes the archive.
+on:
+  push:
+    paths: ["incoming/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack
+        run: |
+          set -e
+          shopt -s nullglob
+          files=(incoming/*.tar.gz)
+          [ ${#files[@]} -eq 0 ] && { echo "nothing to unpack"; exit 0; }
+          for f in "${files[@]}"; do
+            echo "unpacking $f"
+            tar -tzf "$f" | grep -E '^(/|\.\./)|/\.\./' && { echo "unsafe paths in archive"; exit 1; }
+            tar -xzf "$f" --exclude='.github' --exclude='data/*' -C .
+            git rm -q "$f"
+          done
+          git config user.name "autopilot-bot"
+          git config user.email "autopilot-bot@users.noreply.github.com"
+          git add -A
+          git commit -q -m "update robot code from upload"
+          git push -q
