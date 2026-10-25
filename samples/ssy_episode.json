@@ -1,0 +1,334 @@
+{
+  "topic_id": "sukanya-samriddhi",
+  "series": "schemes",
+  "as_of": "2026",
+  "cast": { "teacher": "guruji", "learner": "chotu", "guest": "sunita", "expert": "meera" },
+  "hook": {
+    "title": "सिर्फ ₹250 में बेटी का Future?",
+    "subtitle": "Sukanya Samriddhi Yojana · Bank Exam",
+    "setting": "home",
+    "visual": {
+      "kind": "exploded",
+      "title": "Sukanya Samriddhi Yojana",
+      "center": { "label": "SSY", "icon": "piggybank" },
+      "items": [
+        { "label": "₹250 से शुरुआत", "icon": "coins" },
+        { "label": "सरकारी गारंटी", "icon": "shield" },
+        { "label": "Tax-free (EEE)", "icon": "percent" },
+        { "label": "21 साल में Maturity", "icon": "calendar" }
+      ]
+    },
+    "lines": [
+      { "speaker": "sunita", "emotion": "worried", "gesture": "think", "text": "मेरी बेटी परी अभी सिर्फ दो महीने की है... पर उसकी पढ़ाई और शादी के खर्च के बारे में सोचकर ही डर लगता है!" },
+      { "speaker": "chotu", "emotion": "excited", "gesture": "point", "text": "दीदी, सिर्फ ₹250 से शुरू होने वाली एक सरकारी योजना है — और Bank Exam में इसके सवाल हर साल आते हैं!" },
+      { "speaker": "guruji", "emotion": "proud", "gesture": "explain", "text": "बिल्कुल सही, छोटू! आज समझेंगे Sukanya Samriddhi Yojana — शुरू से आखिर तक, exam के हर ज़रूरी point के साथ।" }
+    ]
+  },
+  "sections": [
+    {
+      "chapter": "योजना क्या है?",
+      "mode": "stage",
+      "setting": "home",
+      "chars": ["guruji", "sunita", "chotu"],
+      "lines": [
+        { "speaker": "guruji", "emotion": "happy", "gesture": "explain", "text": "Sukanya Samriddhi Yojana एक small savings scheme है, जो भारत सरकार ने बेटियों के भविष्य के लिए बनाई है।", "onscreen": "बेटियों के लिए Small Savings Scheme" },
+        { "speaker": "chotu", "emotion": "curious", "gesture": "raise", "text": "गुरुजी, इसे कब और कहाँ से launch किया गया था?" },
+        { "speaker": "guruji", "emotion": "proud", "gesture": "point", "text": "22 जनवरी 2015 को, हरियाणा के पानीपत से — 'बेटी बचाओ, बेटी पढ़ाओ' अभियान के तहत। ये date exam के लिए याद रखना!", "onscreen": "22 जनवरी 2015 · पानीपत" },
+        { "speaker": "sunita", "emotion": "curious", "gesture": "none", "text": "मतलब इसके पीछे सरकार है? पैसा सुरक्षित रहेगा?" },
+        { "speaker": "guruji", "emotion": "happy", "gesture": "thumbs", "text": "हाँ दीदी, ये government-backed योजना है। इसके नियम Sukanya Samriddhi Account Scheme, 2019 में लिखे हैं।", "onscreen": "SSA Scheme, 2019" }
+      ]
+    },
+    {
+      "chapter": "योजना का सफ़र",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "timeline",
+        "title": "Sukanya Samriddhi का सफ़र",
+        "items": [
+          { "year": "2015", "label": "Launch", "detail": "पानीपत, बेटी बचाओ बेटी पढ़ाओ" },
+          { "year": "2018", "label": "Min deposit घटा", "detail": "₹1,000 से ₹250" },
+          { "year": "2019", "label": "नए नियम", "detail": "SSA Scheme, 2019" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "चलो, इस योजना का छोटा सा सफ़र देखते हैं।" },
+        { "speaker": "guruji", "text": "2015 में ये योजना पानीपत से शुरू हुई।", "reveal": 0 },
+        { "speaker": "guruji", "text": "2018 में साल की minimum जमा राशि ₹1,000 से घटाकर सिर्फ ₹250 कर दी गई।", "reveal": 1 },
+        { "speaker": "guruji", "text": "और 2019 में नए नियम आए — Sukanya Samriddhi Account Scheme, 2019।", "reveal": 2 }
+      ]
+    },
+    {
+      "chapter": "खाता कौन खोल सकता है?",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "anatomy",
+        "title": "खाता खोलने के नियम",
+        "object": "form",
+        "items": [
+          { "label": "बेटी की उम्र 10 साल से कम" },
+          { "label": "Parent या Legal Guardian खोलें" },
+          { "label": "एक बेटी, एक खाता" },
+          { "label": "एक परिवार में अधिकतम 2 बेटियाँ" },
+          { "label": "Twins/Triplets पर छूट", "detail": "तीसरा खाता भी" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "अब देखते हैं — ये खाता कौन खोल सकता है? इस form को ध्यान से देखो।" },
+        { "speaker": "guruji", "text": "पहली शर्त: बेटी की उम्र 10 साल से कम होनी चाहिए।", "reveal": 0 },
+        { "speaker": "guruji", "text": "खाता माता-पिता या कानूनी अभिभावक, यानी legal guardian, खोलते हैं।", "reveal": 1 },
+        { "speaker": "guruji", "text": "एक बेटी के नाम पर सिर्फ एक ही खाता खुल सकता है।", "reveal": 2 },
+        { "speaker": "guruji", "text": "और एक परिवार में ज़्यादा से ज़्यादा दो बेटियों के लिए।", "reveal": 3 },
+        { "speaker": "chotu", "text": "और अगर जुड़वाँ बेटियाँ हों तो, गुरुजी?" },
+        { "speaker": "guruji", "text": "तब छूट है — twins या triplets होने पर तीसरा खाता भी खुल सकता है।", "reveal": 4 }
+      ]
+    },
+    {
+      "chapter": "कितना पैसा, कितने साल?",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": { "kind": "stat", "title": "हर साल जमा", "value": "₹250", "label": "कम से कम · हर financial year", "icon": "coins" },
+      "lines": [
+        { "speaker": "guruji", "text": "अब सबसे ज़रूरी बात — पैसा कितना जमा करना है? हर financial year में कम से कम ₹250।" }
+      ]
+    },
+    {
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": { "kind": "stat", "title": "हर साल जमा", "value": "₹1,50,000", "label": "ज़्यादा से ज़्यादा · हर financial year", "icon": "rupee" },
+      "lines": [
+        { "speaker": "guruji", "text": "और ज़्यादा से ज़्यादा डेढ़ लाख रुपये, यानी ₹1.5 लाख, एक साल में।" }
+      ]
+    },
+    {
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "cutaway",
+        "title": "गुल्लक के अंदर: पैसा कैसे बढ़ता है",
+        "object": "piggybank",
+        "items": [
+          { "label": "पहले 15 साल", "detail": "आप पैसा जमा करते हैं" },
+          { "label": "अगले 6 साल", "detail": "जमा नहीं, सिर्फ ब्याज जुड़ता है" },
+          { "label": "21 साल पूरे", "detail": "खाता Mature" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "अब इस गुल्लक को बीच से काटकर देखते हैं कि अंदर पैसा कैसे बढ़ता है।" },
+        { "speaker": "guruji", "text": "पहले 15 साल तक आप पैसा जमा करते हैं।", "reveal": 0 },
+        { "speaker": "guruji", "text": "उसके बाद जमा नहीं करना होता, लेकिन ब्याज जुड़ता रहता है।", "reveal": 1 },
+        { "speaker": "guruji", "text": "और खाता खुलने के ठीक 21 साल बाद ये mature हो जाता है।", "reveal": 2 }
+      ]
+    },
+    {
+      "mode": "stage",
+      "setting": "home",
+      "chars": ["sunita", "chotu"],
+      "lines": [
+        { "speaker": "chotu", "emotion": "excited", "gesture": "point", "text": "मतलब अगर परी का खाता आज खुला, तो 21 साल बाद पूरा पैसा मिलेगा!", "onscreen": "15 साल जमा → 21 साल Maturity" },
+        { "speaker": "sunita", "emotion": "happy", "gesture": "thumbs", "text": "वाह! और उस पर ब्याज कितना मिलता है?" }
+      ]
+    },
+    {
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": { "kind": "stat", "title": "ब्याज दर", "value": "8.2%", "label": "सालाना ब्याज · compounded yearly", "note": "दर सरकार हर तिमाही तय करती है — ताज़ा दर India Post की वेबसाइट पर देखें", "icon": "percent" },
+      "lines": [
+        { "speaker": "guruji", "text": "ब्याज दर सरकार हर तिमाही तय करती है। पिछले कुछ समय से ये 8.2% सालाना रही है, और ब्याज हर साल compound होता है। Video देखते समय ताज़ा दर India Post की website पर ज़रूर check करें।" }
+      ]
+    },
+    {
+      "chapter": "Tax का फ़ायदा: EEE",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "exploded",
+        "title": "EEE Tax Status",
+        "center": { "label": "EEE", "icon": "percent" },
+        "items": [
+          { "label": "E: जमा पर छूट", "detail": "Section 80C (old regime)", "icon": "coins" },
+          { "label": "E: ब्याज Tax-free", "icon": "growth" },
+          { "label": "E: Maturity Tax-free", "icon": "gift" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "इस योजना की एक बड़ी खासियत है — EEE status। EEE यानी तीन बार Exempt।" },
+        { "speaker": "guruji", "text": "पहला E: जमा किए गए पैसे पर Section 80C के तहत छूट — old tax regime में।", "reveal": 0 },
+        { "speaker": "guruji", "text": "दूसरा E: हर साल मिलने वाला ब्याज tax-free है।", "reveal": 1 },
+        { "speaker": "guruji", "text": "तीसरा E: maturity पर मिलने वाला पूरा पैसा भी tax-free।", "reveal": 2 },
+        { "speaker": "chotu", "text": "Exam में EEE वाला सवाल तो पक्का आएगा!" }
+      ]
+    },
+    {
+      "chapter": "खाता कैसे खोलें?",
+      "mode": "stage",
+      "setting": "bank",
+      "chars": ["sunita", "meera"],
+      "lines": [
+        { "speaker": "sunita", "emotion": "happy", "gesture": "wave", "text": "नमस्ते मैम, मुझे अपनी बेटी का Sukanya Samriddhi खाता खुलवाना है।" },
+        { "speaker": "meera", "emotion": "happy", "gesture": "explain", "text": "ज़रूर! ये खाता किसी भी post office या authorised bank में खुलता है। बस ये documents साथ लाइए।", "onscreen": "Post Office या Authorised Bank" }
+      ]
+    },
+    {
+      "mode": "board",
+      "presenter": "meera",
+      "visual": {
+        "kind": "knolling",
+        "title": "ज़रूरी Documents",
+        "items": [
+          { "label": "बेटी का जन्म प्रमाण पत्र", "icon": "document" },
+          { "label": "Guardian का ID (Aadhaar/PAN)", "icon": "aadhaar" },
+          { "label": "पते का प्रमाण", "icon": "location" },
+          { "label": "फोटो", "icon": "photo" },
+          { "label": "पहली जमा राशि", "icon": "cash" },
+          { "label": "भरा हुआ Form", "icon": "form" }
+        ]
+      },
+      "lines": [
+        { "speaker": "meera", "text": "देखिए, ये रहे ज़रूरी documents।" },
+        { "speaker": "meera", "text": "बेटी का जन्म प्रमाण पत्र, यानी birth certificate।", "reveal": 0 },
+        { "speaker": "meera", "text": "आपका पहचान पत्र, जैसे Aadhaar या PAN।", "reveal": 1 },
+        { "speaker": "meera", "text": "पते का प्रमाण, और आपकी फोटो।", "reveal": [2, 3] },
+        { "speaker": "meera", "text": "साथ में पहली जमा राशि और भरा हुआ account opening form।", "reveal": [4, 5] }
+      ]
+    },
+    {
+      "chapter": "पैसा कब निकाल सकते हैं?",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "steps",
+        "title": "पैसा निकालने के नियम",
+        "items": [
+          { "label": "पढ़ाई के लिए 50% तक", "detail": "बेटी 18 साल की हो या 10वीं पास कर ले", "icon": "education" },
+          { "label": "18 साल के बाद शादी पर", "detail": "खाता बंद करा सकते हैं", "icon": "heart" },
+          { "label": "खास हालात में", "detail": "Compassionate grounds पर 5 साल बाद", "icon": "shield" },
+          { "label": "₹250 नहीं जमा किया?", "detail": "खाता Default — ₹50 सालाना penalty देकर फिर चालू", "icon": "warning" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "अब समझते हैं कि पैसा कब निकाल सकते हैं।" },
+        { "speaker": "guruji", "text": "बेटी 18 साल की हो जाए या 10वीं पास कर ले, तो पढ़ाई के लिए 50% तक पैसा निकाला जा सकता है।", "reveal": 0 },
+        { "speaker": "guruji", "text": "18 साल के बाद बेटी की शादी पर खाता बंद कराया जा सकता है।", "reveal": 1 },
+        { "speaker": "guruji", "text": "कुछ खास हालात में, जैसे गंभीर बीमारी — compassionate grounds पर — 5 साल बाद खाता पहले भी बंद हो सकता है।", "reveal": 2 },
+        { "speaker": "guruji", "text": "और ध्यान रहे: किसी साल ₹250 जमा नहीं किए, तो खाता default हो जाता है। ₹50 सालाना penalty देकर इसे फिर चालू किया जा सकता है।", "reveal": 3 }
+      ]
+    },
+    {
+      "chapter": "Exam Corner",
+      "mode": "board",
+      "presenter": "guruji",
+      "visual": {
+        "kind": "keyfacts",
+        "title": "Exam Corner: याद रखें",
+        "items": [
+          { "label": "Launch: 22 जनवरी 2015", "detail": "पानीपत, हरियाणा" },
+          { "label": "अभियान", "detail": "बेटी बचाओ, बेटी पढ़ाओ" },
+          { "label": "जमा: ₹250 से ₹1.5 लाख", "detail": "हर financial year" },
+          { "label": "15 साल जमा, 21 साल Maturity" },
+          { "label": "Tax: EEE", "detail": "Section 80C" },
+          { "label": "नियम: SSA Scheme, 2019" }
+        ]
+      },
+      "lines": [
+        { "speaker": "guruji", "text": "अब Exam Corner — ये points notebook में लिख लो।" },
+        { "speaker": "guruji", "text": "Launch: 22 जनवरी 2015, पानीपत, हरियाणा।", "reveal": 0 },
+        { "speaker": "guruji", "text": "अभियान: बेटी बचाओ, बेटी पढ़ाओ।", "reveal": 1 },
+        { "speaker": "guruji", "text": "जमा: हर साल ₹250 से ₹1.5 लाख तक।", "reveal": 2 },
+        { "speaker": "guruji", "text": "15 साल जमा, और 21 साल में maturity।", "reveal": 3 },
+        { "speaker": "guruji", "text": "Tax status: EEE, और नियम: SSA Scheme, 2019।", "reveal": [4, 5] }
+      ]
+    }
+  ],
+  "quiz": [
+    { "q": "Sukanya Samriddhi Yojana किस अभियान के तहत शुरू हुई?", "options": ["Swachh Bharat", "Beti Bachao Beti Padhao", "Make in India", "Digital India"], "answer": 1, "explain": "22 जनवरी 2015 को पानीपत से, बेटी बचाओ बेटी पढ़ाओ के तहत।" },
+    { "q": "एक financial year में कम से कम कितना जमा करना ज़रूरी है?", "options": ["₹100", "₹250", "₹500", "₹1,000"], "answer": 1, "explain": "2018 में ₹1,000 से घटाकर ₹250 किया गया।" },
+    { "q": "खाता खुलने के कितने साल बाद mature होता है?", "options": ["15 साल", "18 साल", "21 साल", "25 साल"], "answer": 2, "explain": "15 साल जमा, 21 साल में maturity।" },
+    { "q": "खाता खोलने के लिए बेटी की उम्र कितनी होनी चाहिए?", "options": ["5 साल से कम", "10 साल से कम", "15 साल से कम", "18 साल से कम"], "answer": 1, "explain": "बेटी की उम्र 10 साल से कम होनी चाहिए।" },
+    { "q": "Sukanya Samriddhi Yojana का tax status क्या है?", "options": ["EEE", "EET", "ETE", "TEE"], "answer": 0, "explain": "जमा, ब्याज और maturity — तीनों पर छूट।" }
+  ],
+  "recap": [
+    "बेटी (10 साल से कम) के लिए सरकारी small savings scheme",
+    "Launch: 22 जनवरी 2015, पानीपत — बेटी बचाओ बेटी पढ़ाओ",
+    "हर साल ₹250 से ₹1.5 लाख तक जमा",
+    "15 साल जमा, 21 साल में maturity",
+    "EEE tax status — Section 80C",
+    "पढ़ाई के लिए 18 साल/10वीं के बाद 50% तक निकासी"
+  ],
+  "outro": {
+    "next_title": "PPF: Public Provident Fund पूरी जानकारी",
+    "lines": [
+      { "speaker": "chotu", "emotion": "excited", "gesture": "wave", "text": "Thank you गुरुजी! अब exam में Sukanya का कोई सवाल नहीं छूटेगा।" },
+      { "speaker": "guruji", "emotion": "happy", "gesture": "wave", "text": "अगले video में समझेंगे PPF, यानी Public Provident Fund। Comment में बताओ — quiz में आपके कितने जवाब सही हुए?" }
+    ]
+  },
+  "meta": {
+    "title": "Sukanya Samriddhi Yojana 2026 | सुकन्या समृद्धि योजना पूरी जानकारी | Bank Exam",
+    "title_en": "Sukanya Samriddhi Yojana Explained (2026) | Complete Guide for Bank & SSC Exams",
+    "summary": "Sukanya Samriddhi Yojana (SSY) की पूरी जानकारी एक कहानी के साथ — किसके लिए है, कितना जमा, कितने साल, ब्याज, EEE tax फ़ायदा, documents और पैसा कब निकाल सकते हैं। Bank, SSC, Railway और State exams के लिए Exam Corner और 5-question quiz के साथ।",
+    "summary_en": "Sukanya Samriddhi Yojana (SSY) explained through a story: who can open it, deposit limits, tenure, interest, EEE tax benefit, documents and withdrawal rules — with an Exam Corner and a 5-question quiz for Bank, SSC, Railway and State exams.",
+    "tags": ["Sukanya Samriddhi Yojana", "सुकन्या समृद्धि योजना", "SSY 2026", "Sukanya Samriddhi Yojana in Hindi", "SSY interest rate", "government schemes for girl child", "Beti Bachao Beti Padhao", "bank exam GK", "banking awareness", "SSC GK", "government schemes 2026", "small savings schemes", "EEE tax", "Section 80C"],
+    "hashtags": ["#SukanyaSamriddhiYojana", "#BankExam", "#SarkariYojana"],
+    "thumbnail": { "textTop": "Bank Exam 2026", "textBig": "₹250 में बेटी का Future?", "textSmall": "SSY पूरी जानकारी", "emotion": "shocked", "character": "sunita", "icon": "piggybank" },
+    "pinned_comment": "🧠 Quick Quiz: SSY खाता खुलने के कितने साल बाद mature होता है? A) 15  B) 18  C) 21  D) 25 — जवाब comment करें! Video में पूरा quiz है 👇",
+    "sources": [
+      "https://www.indiapost.gov.in/Financial/Pages/Content/Sukanya-Samriddhi-Account.aspx",
+      "https://www.nsiindia.gov.in/",
+      "https://dea.gov.in/"
+    ]
+  },
+  "shorts": [
+    {
+      "kind": "fact",
+      "title": "SSY: 15 साल जमा, 21 साल में पैसा! #Shorts",
+      "hook_text": "₹250 से बेटी का Future?",
+      "cast": ["chotu", "guruji"],
+      "visual": {
+        "kind": "cutaway",
+        "title": "पैसा कैसे बढ़ता है",
+        "object": "piggybank",
+        "items": [
+          { "label": "15 साल", "detail": "पैसा जमा करें" },
+          { "label": "6 साल", "detail": "सिर्फ ब्याज जुड़ता है" },
+          { "label": "21 साल", "detail": "Maturity" }
+        ]
+      },
+      "lines": [
+        { "speaker": "chotu", "text": "सिर्फ ₹250 से बेटी के लिए बड़ा fund? हाँ, Sukanya Samriddhi Yojana से!" },
+        { "speaker": "guruji", "text": "पहले 15 साल पैसा जमा करो।", "reveal": 0 },
+        { "speaker": "guruji", "text": "फिर 6 साल सिर्फ ब्याज जुड़ता है।", "reveal": 1 },
+        { "speaker": "guruji", "text": "और 21 साल पूरे होते ही खाता mature!", "reveal": 2 },
+        { "speaker": "chotu", "text": "पूरी जानकारी के लिए channel पर full video देखो!" }
+      ]
+    },
+    {
+      "kind": "quiz",
+      "title": "Bank Exam Quiz: SSY का Tax Status? #Shorts",
+      "hook_text": "5 सेकंड में जवाब दो!",
+      "cast": ["guruji"],
+      "quiz": { "q": "Sukanya Samriddhi Yojana का tax status क्या है?", "options": ["EEE", "EET", "ETE", "TEE"], "answer": 0, "explain": "जमा, ब्याज और maturity — तीनों tax-free!" },
+      "lines": [
+        { "speaker": "guruji", "text": "Bank Exam का सवाल: Sukanya Samriddhi Yojana का tax status क्या है? 5 सेकंड!" },
+        { "speaker": "guruji", "text": "सही जवाब है EEE — जमा, ब्याज और maturity, तीनों पर छूट। Full video channel पर!" }
+      ]
+    },
+    {
+      "kind": "myth",
+      "title": "Myth vs Fact: SSY से 21 साल तक पैसा नहीं निकलता? #Shorts",
+      "hook_text": "Myth या Fact?",
+      "cast": ["sunita", "guruji"],
+      "visual": {
+        "kind": "compare",
+        "title": "Myth vs Fact",
+        "left": { "title": "Myth ❌", "points": ["21 साल तक एक भी रुपया नहीं निकलता"] },
+        "right": { "title": "Fact ✅", "points": ["पढ़ाई के लिए 50% तक निकासी — 18 साल/10वीं के बाद"] }
+      },
+      "lines": [
+        { "speaker": "sunita", "text": "सुना है Sukanya में 21 साल तक एक भी रुपया नहीं निकलता?", "reveal": 0 },
+        { "speaker": "guruji", "text": "ये Myth है! बेटी 18 साल की हो या 10वीं पास कर ले, तो पढ़ाई के लिए 50% तक निकाल सकते हैं।", "reveal": 1 },
+        { "speaker": "guruji", "text": "ऐसे ही exam facts के लिए channel subscribe करो!" }
+      ]
+    }
+  ]
+}

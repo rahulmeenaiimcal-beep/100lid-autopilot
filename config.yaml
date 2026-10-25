@@ -1,0 +1,181 @@
+# =====================================================================
+#  100LID AUTOPILOT — SETTINGS
+#  This is the only file you normally need to edit (pencil icon on GitHub → Commit).
+#  Lines starting with # are notes for you and are ignored by the robot.
+# =====================================================================
+
+channel:
+  name: "100LID"                       # shown on videos and thumbnails
+  full_name: "100LID - EDUCATION"
+  handle: "@100LIDEDUCATION"
+  channel_id: "UC2-NSOsRXYHgT949r_2aw1A"
+  language: "hi"                       # Hindi, with English exam terms kept in English
+  audience: "Hindi-speaking aspirants (18-34) preparing for bank, SSC, railway and state government exams, mostly watching on phones"
+  tone: "warm, clear, story-led, a little playful, never misleading, never financial advice"
+
+# ---------------------------------------------------------------------
+# WHEN VIDEOS GO LIVE (India time). The robot makes each video about 2 days
+# early so you have time to review it.
+# ---------------------------------------------------------------------
+schedule:
+  timezone: "Asia/Kolkata"
+  long:                                # 3 long videos a week
+    - { day: "tue", time: "18:00" }
+    - { day: "thu", time: "18:00" }
+    - { day: "sat", time: "11:00" }
+  shorts:                              # 1 Short every day
+    - { day: "daily", time: "20:00" }
+  make_ahead_hours: 48                 # make each video this long before its slot
+  max_uploads_per_day: 3
+
+# ---------------------------------------------------------------------
+# REVIEW: how videos go live
+#   approve = uploaded PRIVATE. The robot opens a GitHub issue (you get an email);
+#             reply "ok" and it schedules the video for its slot. Reply "no" to reject.
+#   veto    = uploaded and SCHEDULED for its slot; reply "no" to stop it in time.
+#   auto    = goes live by itself (not recommended in month 1).
+# ---------------------------------------------------------------------
+review_mode: "approve"
+
+# ---------------------------------------------------------------------
+# THE CAST. Each video uses one teacher + 1-2 story characters picked to suit
+# the topic. Their looks are fixed so they are recognisable in every video.
+# Voices: "edge" = free Microsoft voices (2 Hindi voices, varied by pitch/speed);
+#         "parler" = free open-source AI4Bharat Indic Parler-TTS voices.
+# ---------------------------------------------------------------------
+cast:
+  guruji:
+    name_hi: "गुरुजी"
+    name_en: "Guruji"
+    role: "teacher"
+    about: "an experienced, kind teacher who explains laws, Acts and schemes with simple examples"
+    topics: ["scheme", "law", "economy", "general"]
+    look: { skin: "#c98b5e", hair: "#f2f2f2", hairStyle: "bald_sides", beard: "white_full", mustache: true, glasses: true, top: "#8d5524", topStyle: "kurta", accent: "#e9c46a", accessory: "shawl", bindi: false, height: 1.0 }
+    voice:
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "-8Hz", rate: "-4%" }
+      parler: { speaker: "Rohit", description: "Rohit speaks in a deep, calm and warm voice at a moderate pace. The recording is very clear with no background noise." }
+  meera:
+    name_hi: "मीरा मैम"
+    name_en: "Meera Ma'am"
+    role: "teacher"
+    about: "a confident bank officer who explains banking, RBI and digital payments from real branch experience"
+    topics: ["banking", "rbi", "digital", "economy"]
+    look: { skin: "#b9784f", hair: "#2b1b17", hairStyle: "bun", beard: "none", mustache: false, glasses: false, top: "#1d3557", topStyle: "blazer", accent: "#e63946", accessory: "id_badge", bindi: true, height: 0.96 }
+    voice:
+      edge: { voice: "hi-IN-SwaraNeural", pitch: "+0Hz", rate: "+0%" }
+      parler: { speaker: "Divya", description: "Divya speaks in a confident, clear and friendly voice at a moderate pace. The recording is very clear with no background noise." }
+  chotu:
+    name_hi: "छोटू"
+    name_en: "Chotu"
+    role: "learner"
+    about: "an eager young exam aspirant who asks the questions viewers are thinking"
+    topics: ["any"]
+    look: { skin: "#a8693f", hair: "#1b1b1b", hairStyle: "spiky", beard: "none", mustache: false, glasses: false, top: "#ffd23f", topStyle: "tshirt", accent: "#ef476f", accessory: "backpack", bindi: false, height: 0.9 }
+    voice:
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "+16Hz", rate: "+6%" }
+      parler: { speaker: "Aman", description: "Aman speaks in an energetic, curious, slightly high-pitched voice at a fast pace. The recording is very clear with no background noise." }
+  ramesh:
+    name_hi: "रमेश काका"
+    name_en: "Ramesh Kaka"
+    role: "guest"
+    about: "a practical farmer from a village who wants to know how schemes help farmers and rural families"
+    topics: ["farmer", "rural", "agriculture", "loan", "insurance"]
+    look: { skin: "#8d5a3b", hair: "#1b1b1b", hairStyle: "pagdi", pagdi: "#e85d04", beard: "stubble", mustache: true, glasses: false, top: "#f8f9fa", topStyle: "kurta", accent: "#2a9d8f", accessory: "gamcha", bindi: false, height: 1.0 }
+    voice:
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "-14Hz", rate: "-6%" }
+      parler: { speaker: "Rohit", description: "Rohit speaks in a low-pitched, rustic and slow voice. The recording is very clear with no background noise." }
+  sunita:
+    name_hi: "सुनीता दीदी"
+    name_en: "Sunita Didi"
+    role: "guest"
+    about: "a mother and self-help-group member who wants to save and grow money for her family"
+    topics: ["women", "savings", "girl", "shg", "health", "pension"]
+    look: { skin: "#9b6142", hair: "#1b1b1b", hairStyle: "long_braid", beard: "none", mustache: false, glasses: false, top: "#2a9d8f", topStyle: "saree", accent: "#ffd23f", accessory: "none", bindi: true, height: 0.94 }
+    voice:
+      edge: { voice: "hi-IN-SwaraNeural", pitch: "-8Hz", rate: "-4%" }
+      parler: { speaker: "Rani", description: "Rani speaks in a warm, gentle voice at a moderate pace. The recording is very clear with no background noise." }
+  sharmaji:
+    name_hi: "शर्मा जी"
+    name_en: "Sharma ji"
+    role: "guest"
+    about: "a small shopkeeper who wants loans, digital payments and business support explained"
+    topics: ["msme", "business", "loan", "digital", "tax"]
+    look: { skin: "#c48a62", hair: "#3b2a20", hairStyle: "side_part", beard: "none", mustache: true, glasses: true, top: "#90be6d", topStyle: "shirt", accent: "#f8961e", accessory: "apron", bindi: false, height: 0.98 }
+    voice:
+      edge: { voice: "hi-IN-MadhurNeural", pitch: "+4Hz", rate: "+2%" }
+      parler: { speaker: "Aman", description: "Aman speaks in a cheerful, chatty, medium-pitched voice at a moderate pace. The recording is very clear with no background noise." }
+
+# ---------------------------------------------------------------------
+# SERIES (playlists). The robot creates these playlists by itself.
+# ---------------------------------------------------------------------
+series:
+  schemes: "Sarkari Yojana Explained | सरकारी योजनाएँ"
+  banking_law: "Banking Laws Made Simple | बैंकिंग कानून"
+  rbi_economy: "RBI & Economy Basics | RBI और अर्थव्यवस्था"
+  current_affairs: "Monthly Banking Current Affairs | करंट अफेयर्स"
+  shorts: "60-Second Exam Facts | Shorts"
+
+# Monthly mix of the 12 long videos (the robot also learns from results).
+topic_mix:
+  schemes: 5
+  banking_law: 2
+  rbi_economy: 4
+  current_affairs: 1
+
+# ---------------------------------------------------------------------
+# VIDEO SHAPE
+# ---------------------------------------------------------------------
+video:
+  long_minutes: [8, 12]                # target length of long videos
+  long_words: [1300, 1800]             # spoken Hindi words for that length
+  short_seconds: [40, 55]
+  short_words: [90, 125]
+  quiz_questions: 5
+  quiz_countdown_seconds: 5
+  shorts_per_long: 3                   # each long video gives 3 Shorts (fact, quiz, myth-vs-fact)
+  burn_captions_on_shorts: true
+  # The special visual moments. The robot spreads these through every long video,
+  # timed where viewers usually start to drift away (around 25%, 50% and 70%).
+  devices: ["exploded", "knolling", "cutaway", "anatomy", "stat", "timeline", "compare", "steps", "keyfacts"]
+
+publish:
+  category_id: "27"                    # 27 = Education
+  made_for_kids: false
+  contains_synthetic_media: false      # cartoon animation, not realistic people
+  add_ai_note_in_description: true     # honest note that AI tools help make the video
+  post_first_comment: true             # posts a quiz question as the first comment
+  english_subtitles: true              # Hindi + English subtitle tracks on every video
+  english_title_description: true      # English title/description for English-language viewers
+
+llm:
+  # Free AI "writers". The robot tries them in order; if one fails, it uses the next.
+  # If a model name stops working, the robot asks the provider which models exist and picks the closest one.
+  providers:
+    - name: gemini
+      base_url: "https://generativelanguage.googleapis.com/v1beta/openai"
+      key_env: GEMINI_API_KEY
+      models: ["gemini-3.5-flash", "gemini-3.1-flash", "gemini-2.5-flash"]
+      prefer: "flash"
+    - name: groq
+      base_url: "https://api.groq.com/openai/v1"
+      key_env: GROQ_API_KEY
+      models: ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]
+      prefer: "gpt-oss"
+    - name: openrouter
+      base_url: "https://openrouter.ai/api/v1"
+      key_env: OPENROUTER_API_KEY
+      models: ["deepseek/deepseek-chat-v3-0324:free", "meta-llama/llama-3.3-70b-instruct:free"]
+      prefer: ":free"
+  fact_check: true                     # a second AI checks every fact against the research notes
+
+tts:
+  # auto   = try the open-source Indic Parler voices; if too slow or failing, use the Microsoft voices
+  # edge   = Microsoft voices only (fastest)
+  # parler = open-source voices only
+  engine: "edge"
+  parler_max_minutes: 40               # give up on Parler for a video if it would take longer than this
+
+render:
+  fps: 30
+  long_size: [1920, 1080]
+  short_size: [1080, 1920]

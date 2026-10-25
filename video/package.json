@@ -1,0 +1,23 @@
+{
+  "name": "100lid-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Animated explainer renderer for the 100LID channel (Remotion)",
+  "scripts": {
+    "render": "remotion render",
+    "still": "remotion still"
+  },
+  "dependencies": {
+    "@fontsource/baloo-2": "^5.0.0",
+    "@fontsource/hind": "^5.0.0",
+    "@remotion/cli": "4.0.529",
+    "lucide-react": "^0.460.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.3"
+  }
+}

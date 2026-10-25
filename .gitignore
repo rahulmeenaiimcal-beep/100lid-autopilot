@@ -1,0 +1,8 @@
+out/
+work/
+node_modules/
+video/.preview/
+__pycache__/
+*.pyc
+.env
+client_secret*.json
