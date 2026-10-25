@@ -19,7 +19,16 @@ def _trim_sample() -> str:
     s["sections"] = [s["sections"][i] for i in (0, 2, 5, 8, 10, 12) if i < len(s["sections"])]
     s["quiz"] = s["quiz"][:2]
     s["shorts"] = s["shorts"][:2]
-    return json.dumps(s, ensure_ascii=False, indent=1)
+    # English is added by a separate translation step, so leave it out of the example
+
+    def strip(o):
+        if isinstance(o, dict):
+            return {k: strip(v) for k, v in o.items() if k not in ("en", "q_en", "explain_en", "options_en", "recap_en")}
+        if isinstance(o, list):
+            return [strip(v) for v in o]
+        return o
+
+    return json.dumps(strip(s), ensure_ascii=False, indent=1)
 
 
 def pick_cast(topic: dict, recent: list[dict]) -> dict:

@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { EpisodeProps, Shot } from "./types";
-import { C, FONT_HEAD } from "./theme";
+import { C, FONT_BODY, FONT_HEAD } from "./theme";
 import { FontGate } from "./fonts";
 import {
   BoardLayout,
@@ -95,6 +95,36 @@ const BurnedCaptions: React.FC<{ ep: EpisodeProps }> = ({ ep }) => {
   );
 };
 
+// English subtitles for long videos: a dark bar in the reserved band at the bottom.
+const LongSubs: React.FC<{ ep: EpisodeProps }> = ({ ep }) => {
+  const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  const subs = ep.subs || [];
+  const cue = subs.find((c) => frame >= c.from && frame < c.to);
+  if (!cue) return null;
+  const u = width / 1920;
+  return (
+    <div style={{ position: "absolute", left: 0, right: 0, bottom: height * 0.018, height: height * 0.105, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 45 }}>
+      <div
+        style={{
+          maxWidth: "78%",
+          background: "rgba(10,14,24,0.82)",
+          color: "#ffffff",
+          fontFamily: FONT_BODY,
+          fontWeight: 600,
+          fontSize: 44 * u,
+          lineHeight: 1.22,
+          textAlign: "center",
+          padding: `${8 * u}px ${26 * u}px`,
+          borderRadius: 14 * u,
+        }}
+      >
+        {cue.text}
+      </div>
+    </div>
+  );
+};
+
 export const Episode: React.FC<EpisodeProps> = (ep) => {
   const { width, height } = useVideoConfig();
   const vertical = height > width;
@@ -107,6 +137,7 @@ export const Episode: React.FC<EpisodeProps> = (ep) => {
           </Sequence>
         ))}
         {vertical ? <BurnedCaptions ep={ep} /> : <Progress ep={ep} />}
+        {!vertical && <LongSubs ep={ep} />}
         <Watermark ep={ep} vertical={vertical} />
       </AbsoluteFill>
     </FontGate>

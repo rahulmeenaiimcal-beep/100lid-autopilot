@@ -83,6 +83,7 @@ export type EpisodeProps = {
   amp: string; // one digit 0-9 per frame: loudness of the voice at that frame
   shots: Shot[];
   captions: Caption[]; // burned in (Shorts only)
+  subs?: Caption[]; // burned-in English subtitles (long videos)
   chapters: Chapter[];
 };
 

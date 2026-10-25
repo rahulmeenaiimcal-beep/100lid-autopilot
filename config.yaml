@@ -133,7 +133,8 @@ video:
   quiz_questions: 5
   quiz_countdown_seconds: 5
   shorts_per_long: 3                   # each long video gives 3 Shorts (fact, quiz, myth-vs-fact)
-  burn_captions_on_shorts: true
+  burn_captions_on_shorts: true        # Shorts: big Hindi words on screen
+  burn_english_subtitles_on_long: true # long videos: English subtitles drawn at the bottom
   # The special visual moments. The robot spreads these through every long video,
   # timed where viewers usually start to drift away (around 25%, 50% and 70%).
   devices: ["exploded", "knolling", "cutaway", "anatomy", "stat", "timeline", "compare", "steps", "keyfacts"]

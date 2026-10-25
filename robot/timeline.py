@@ -21,6 +21,7 @@ class Clip:
     duration: float              # seconds
     amp: list[float]             # loudness per video frame, 0..1
     path: str = ""               # audio file
+    en: str = ""                 # English subtitle text for this line
 
 
 @dataclass
@@ -78,6 +79,20 @@ def visual_items(v: dict | None) -> int:
     return len(v.get("items") or [])
 
 
+def sub_chunks(text: str, start: int, end: int, max_chars: int = 84) -> list[dict]:
+    """Splits an English line into subtitle cues of at most 2 short lines, timed by length."""
+    from .captions import _split  # same splitting rules as the .srt files
+
+    pieces = _split(text.strip(), max_chars) if text and text.strip() else []
+    total = sum(len(p) for p in pieces) or 1
+    out, t = [], float(start)
+    for p in pieces:
+        d = (end - start) * len(p) / total
+        out.append({"from": int(t), "to": int(t + d), "text": p})
+        t += d
+    return out
+
+
 def caption_chunks(text: str, start: int, end: int, max_words: int = 4) -> list[dict]:
     """Splits a spoken line into short on-screen caption pieces, timed by length."""
     words = [w for w in re.split(r"\s+", text.strip()) if w]
@@ -115,6 +130,8 @@ class Builder:
         self.talk: list[dict] = []
         self.amp: list[int] = []
         self.captions: list[dict] = []
+        self.subs: list[dict] = []        # burned-in English subtitles (long videos)
+        self.burn_en = (not self.vertical) and bool(settings.config()["video"].get("burn_english_subtitles_on_long", True))
         self.plan_voice: list[tuple[int, Clip]] = []
         self.sfx: list[tuple[int, str]] = []
         self.chapters: list[tuple[float, str]] = []
@@ -128,12 +145,13 @@ class Builder:
         if cid and cid not in self.cast_ids and cid in settings.cast():
             self.cast_ids.append(cid)
 
-    def say(self, speaker: str, text: str) -> tuple[int, int, Clip]:
+    def say(self, speaker: str, text: str, en: str = "") -> tuple[int, int, Clip]:
         """Adds one spoken line at the current time; returns (start, end) frames."""
         self._use(speaker)
         gap = 0 if self.last_speaker is None else (GAP_SAME if speaker == self.last_speaker else GAP_SWITCH)
         self.t += f(gap)
         clip = self.voice(speaker, text)
+        clip.en = (en or "").strip()
         start = self.t
         n = max(1, f(clip.duration))
         end = start + n
@@ -147,6 +165,8 @@ class Builder:
             self.amp[start + i] = max(0, min(9, int(round(a * 9))))
         if self.vertical and settings.config()["video"].get("burn_captions_on_shorts", True):
             self.captions.extend(caption_chunks(text, start, end))
+        if self.burn_en and clip.en:
+            self.subs.extend(sub_chunks(clip.en, start, end))
         self.t = end
         self.last_speaker = speaker
         return start, end, clip
@@ -191,7 +211,7 @@ class Builder:
         ids = ids[:3]
         self.sfx.append((start, "hit"))
         for ln in story:
-            self.say(ln["speaker"], ln["text"])
+            self.say(ln["speaker"], ln["text"], ln.get("en", ""))
         chars = self.stage_chars(ids, story[0]["speaker"] if story else None, story[0] if story else None)
         self.add_shot(
             start,
@@ -230,7 +250,7 @@ class Builder:
         prev = None
         for i, ln in enumerate(lines):
             start = self.t
-            s0, s1, _ = self.say(ln["speaker"], ln["text"])
+            s0, s1, _ = self.say(ln["speaker"], ln["text"], ln.get("en", ""))
             if i == len(lines) - 1:
                 self.pause(0.15)
             cam = "wide" if i == 0 or i % 3 == 2 else ("close" if ln["speaker"] != prev else "push")
@@ -259,7 +279,7 @@ class Builder:
         reveal: dict[int, int] = {}
         explicit = any(ln.get("reveal") is not None for ln in lines)
         for i, ln in enumerate(lines):
-            s0, s1, _ = self.say(ln["speaker"], ln["text"])
+            s0, s1, _ = self.say(ln["speaker"], ln["text"], ln.get("en", ""))
             idxs = _reveal_list(ln.get("reveal"))
             if not explicit and n_items:
                 # first line introduces, the next lines reveal one item each
@@ -287,7 +307,7 @@ class Builder:
     def block_quiz(self, q: dict, n: int, total: int, presenter: str) -> None:
         start = self.t
         letters = "ABCD"
-        s0, s1, _ = self.say(presenter, f"प्रश्न {n}: {q['q']}")
+        s0, s1, _ = self.say(presenter, f"प्रश्न {n}: {q['q']}", f"Question {n}: {q['q_en']}" if q.get("q_en") else "")
         count_from = (s1 - start) + f(0.3)
         self.sfx.append((start + count_from, "tick"))
         self.t = start + count_from + f(QUIZ_COUNT)
@@ -296,7 +316,9 @@ class Builder:
         self.last_speaker = None
         ans = q["options"][q["answer"]] if 0 <= q.get("answer", 0) < len(q["options"]) else ""
         explain = q.get("explain") or ""
-        self.say(presenter, f"सही जवाब है {letters[q['answer']]}: {ans}। {explain}".strip())
+        ans_en = (q.get("options_en") or [""] * 4)[q["answer"]] if len(q.get("options_en") or []) == len(q["options"]) else ""
+        en = f"The correct answer is {letters[q['answer']]}: {ans_en}. {q.get('explain_en', '')}".strip() if ans_en else ""
+        self.say(presenter, f"सही जवाब है {letters[q['answer']]}: {ans}। {explain}".strip(), en)
         self.pause(0.35)
         self.add_shot(
             start,
@@ -308,10 +330,11 @@ class Builder:
 
     def block_recap(self, points: list[str], presenter: str) -> None:
         start = self.t
-        self.say(presenter, "चलो, एक minute में recap करते हैं।")
+        en_pts = self.ep.get("recap_en") if len(self.ep.get("recap_en") or []) == len(points) else [""] * len(points)
+        self.say(presenter, "चलो, एक minute में recap करते हैं।", "Let's do a quick one-minute recap." if any(en_pts) else "")
         rv = []
-        for p in points:
-            s0, _, _ = self.say(presenter, p)
+        for p, pe in zip(points, en_pts):
+            s0, _, _ = self.say(presenter, p, pe)
             rv.append(s0 - start)
         self.pause(0.5)
         self.add_shot(start, "recap", title="Quick Recap · याद रखें", recap=points, reveal=rv, presenter=presenter)
@@ -319,7 +342,7 @@ class Builder:
     def block_outro(self, outro: dict) -> None:
         start = self.t
         for ln in outro.get("lines") or []:
-            self.say(ln["speaker"], ln["text"])
+            self.say(ln["speaker"], ln["text"], ln.get("en", ""))
         self.pause(1.6)
         self.add_shot(start, "outro", nextTitle=outro.get("next_title"))
 
@@ -363,7 +386,7 @@ class Builder:
         # 1) hook: first line over a big headline
         start = self.t
         self.sfx.append((start, "hit"))
-        self.say(lines[0]["speaker"], lines[0]["text"])
+        self.say(lines[0]["speaker"], lines[0]["text"], lines[0].get("en", ""))
         hook_chars = self.stage_chars([lines[0]["speaker"]], lines[0]["speaker"], {"emotion": "excited", "gesture": "point"})
         hook_v = None  # on a phone screen the headline + character alone hit harder
         self.add_shot(start, "hook", title=sh.get("hook_text") or sh.get("title"), setting="studio", chars=hook_chars,
@@ -380,7 +403,7 @@ class Builder:
             self.sfx.append((self.t, "ding"))
             self.last_speaker = None
             for ln in rest:
-                self.say(ln["speaker"], ln["text"])
+                self.say(ln["speaker"], ln["text"], ln.get("en", ""))
             self.pause(0.6)
             self.add_shot(qstart, "quiz", presenter=teacher,
                           quiz={**q, "qNo": 1, "total": 1, "countFrom": count_from, "countTo": count_from + f(QUIZ_COUNT), "revealAt": reveal_at})
@@ -414,6 +437,7 @@ class Builder:
             "amp": "".join(str(a) for a in self.amp[:total]),
             "shots": self.shots,
             "captions": self.captions,
+            "subs": self.subs,
             "chapters": [{"from": f(s), "title": t} for s, t in self.chapters],
         }
         return Plan(props=props, voice=self.plan_voice, sfx=self.sfx, chapters=self.chapters, reveal_beats=self.beats)

@@ -19,6 +19,11 @@ export type Ctx = {
   vertical: boolean;
 };
 
+// Long videos reserve a band at the bottom for the burned-in English subtitles,
+// so characters, boards and text never sit behind them.
+export const subBand = (ctx: { ep: EpisodeProps; vertical: boolean; H: number }) =>
+  !ctx.vertical && ctx.ep.subs && ctx.ep.subs.length ? ctx.H * 0.125 : 0;
+
 export const talkerAt = (talk: Talk[], abs: number) => {
   for (let i = 0; i < talk.length; i++) {
     const t = talk[i];
@@ -128,8 +133,9 @@ export const StageLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const chars = shot.chars || [];
   const u = vertical ? W / 1080 : W / 1920;
   const speaker = talkerAt(ep.talk, ctx.abs);
-  const charH = vertical ? H * 0.5 : H * 0.78;
-  const bottom = vertical ? H * 0.2 : H * 0.03;
+  const band = subBand(ctx);
+  const charH = vertical ? H * 0.5 : H * 0.78 - band * 0.55;
+  const bottom = vertical ? H * 0.2 : H * 0.03 + band * 0.72;
   const xs = chars.map((c) => c.x * W);
   // camera
   const cam = shot.camera || "wide";
@@ -171,9 +177,10 @@ export const StageLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
 export const BoardLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const { shot, W, H, vertical, ep, fps } = ctx;
   const u = vertical ? W / 1080 : W / 1920;
+  const band = subBand(ctx);
   const box = vertical
     ? { x: W * 0.04, y: H * 0.13, w: W * 0.92, h: H * 0.5 }
-    : { x: W * 0.035, y: H * 0.06, w: W * 0.72, h: H * 0.88 };
+    : { x: W * 0.035, y: H * 0.05, w: W * 0.72, h: H * 0.89 - band };
   const enter = pop(ctx.f, fps, 0, 15);
   const presenterDefault = shot.presenter || Object.keys(ep.cast)[0];
   const speaker = talkerAt(ep.talk, ctx.abs);
@@ -181,7 +188,7 @@ export const BoardLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const look = ep.cast[presenter];
   const talking = speaker === presenter;
   const listenerId: string | null = null;
-  const pH = vertical ? H * 0.3 : H * 0.72;
+  const pH = vertical ? H * 0.3 : H * 0.72 - band * 0.5;
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       <Setting name="studio" width={W} height={H} frame={ctx.abs} />
@@ -204,7 +211,7 @@ export const BoardLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
         )}
       </div>
       {look && (
-        <div style={{ position: "absolute", right: vertical ? W * 0.02 : W * 0.0, bottom: vertical ? H * 0.06 : -H * 0.02, width: (pH * 400) / 900, height: pH }}>
+        <div style={{ position: "absolute", right: vertical ? W * 0.02 : W * 0.0, bottom: vertical ? H * 0.06 : -H * 0.02 + band * 0.85, width: (pH * 400) / 900, height: pH }}>
           <Character
             look={look}
             emotion={talking ? "happy" : "neutral"}
@@ -219,7 +226,7 @@ export const BoardLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
         </div>
       )}
       {listenerId && ep.cast[listenerId] && (
-        <div style={{ position: "absolute", left: vertical ? W * 0.02 : W * 0.6, bottom: vertical ? H * 0.06 : -H * 0.06, width: (pH * 0.85 * 400) / 900, height: pH * 0.85 }}>
+        <div style={{ position: "absolute", left: vertical ? W * 0.02 : W * 0.6, bottom: vertical ? H * 0.06 : -H * 0.06 + band * 0.85, width: (pH * 0.85 * 400) / 900, height: pH * 0.85 }}>
           <Character
             look={ep.cast[listenerId]}
             emotion="curious"
@@ -332,7 +339,8 @@ export const QuizLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const cols = vertical ? 1 : 2;
   const presenter = shot.presenter || Object.keys(ep.cast)[0];
   const speaker = talkerAt(ep.talk, ctx.abs);
-  const pH = vertical ? H * 0.24 : H * 0.55;
+  const band = subBand(ctx);
+  const pH = vertical ? H * 0.24 : H * 0.55 - band * 0.4;
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "linear-gradient(160deg,#3a0ca3,#7209b7)" }}>
       <div style={{ position: "absolute", top: vertical ? H * 0.1 : H * 0.06, left: W * 0.05, right: W * 0.05, transform: `scale(${enter})` }}>
@@ -402,12 +410,12 @@ export const QuizLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
         </div>
       )}
       {revealed && q.explain && (
-        <div style={{ position: "absolute", left: W * 0.05, right: vertical ? W * 0.05 : W * 0.3, bottom: vertical ? H * 0.3 : H * 0.06, background: "rgba(255,255,255,0.95)", borderRadius: 20 * u, padding: `${14 * u}px ${22 * u}px`, fontFamily: FONT_BODY, fontWeight: 600, fontSize: 44 * u, color: C.ink, opacity: ease(ctx.f, q.revealAt + 4, 10) }}>
+        <div style={{ position: "absolute", left: W * 0.05, right: vertical ? W * 0.05 : W * 0.3, bottom: vertical ? H * 0.3 : H * 0.06 + band, background: "rgba(255,255,255,0.95)", borderRadius: 20 * u, padding: `${14 * u}px ${22 * u}px`, fontFamily: FONT_BODY, fontWeight: 600, fontSize: 44 * u, color: C.ink, opacity: ease(ctx.f, q.revealAt + 4, 10) }}>
           ✅ {q.explain}
         </div>
       )}
       {ep.cast[presenter] && (
-        <div style={{ position: "absolute", right: vertical ? W * 0.62 : W * 0.02, bottom: vertical ? H * 0.02 : -H * 0.03, width: (pH * 400) / 900, height: pH }}>
+        <div style={{ position: "absolute", right: vertical ? W * 0.62 : W * 0.02, bottom: vertical ? H * 0.02 : -H * 0.03 + band * 0.85, width: (pH * 400) / 900, height: pH }}>
           <Character
             look={ep.cast[presenter]}
             emotion={revealed ? "excited" : "curious"}
@@ -434,7 +442,7 @@ export const RecapLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const badge = pop(ctx.f, fps, 10, 8);
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#0b2545" }}>
-      <div style={{ position: "absolute", left: W * 0.06, right: W * 0.06, top: H * 0.06, bottom: H * 0.06, background: "#fffef6", borderRadius: 30 * u, padding: 40 * u, boxSizing: "border-box" }}>
+      <div style={{ position: "absolute", left: W * 0.06, right: W * 0.06, top: H * 0.06, bottom: H * 0.06 + subBand(ctx), background: "#fffef6", borderRadius: 30 * u, padding: 40 * u, boxSizing: "border-box" }}>
         <div style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: 70 * u, color: C.ink }}>{shot.title || "Quick Recap"}</div>
         {items.map((it, i) => {
           const start = reveal[i] ?? i * 25;
@@ -462,7 +470,8 @@ export const OutroLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
   const p2 = pop(ctx.f, fps, 14, 10);
   const click = ctx.f > 40 && ctx.f < 52;
   const chars = Object.keys(ep.cast).slice(0, 2);
-  const pH = vertical ? H * 0.32 : H * 0.5;
+  const band = subBand(ctx);
+  const pH = vertical ? H * 0.32 : H * 0.5 - band * 0.4;
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       <Setting name="studio" width={W} height={H} frame={ctx.abs} />
@@ -478,7 +487,7 @@ export const OutroLayout: React.FC<{ ctx: Ctx }> = ({ ctx }) => {
         </div>
       </div>
       {chars.map((id, i) => (
-        <div key={id} style={{ position: "absolute", left: i === 0 ? W * 0.06 : undefined, right: i === 1 ? W * 0.06 : undefined, bottom: -H * 0.02, width: (pH * 400) / 900, height: pH }}>
+        <div key={id} style={{ position: "absolute", left: i === 0 ? W * 0.06 : undefined, right: i === 1 ? W * 0.06 : undefined, bottom: -H * 0.02 + band * 0.85, width: (pH * 400) / 900, height: pH }}>
           <Character look={ep.cast[id]} emotion="happy" gesture="wave" frame={ctx.abs} seed={id} height={pH} facing={i === 0 ? 1 : -1} talking={talkerAt(ep.talk, ctx.abs) === id} mouth={talkerAt(ep.talk, ctx.abs) === id ? ampAt(ep.amp, ctx.abs) : 0} />
         </div>
       ))}

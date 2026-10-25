@@ -152,6 +152,12 @@ def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool 
         log(f"script by {who}: {writer.spoken_words(ep)} words, problems: {problems or 'none'}")
         fc = factcheck.check(ep, notes, _provider(who)) if settings.config()["llm"].get("fact_check", True) else {"fixed": [], "unresolved": []}
         log(f"fact-check by {fc.get('checked_by')}: {len(fc['fixed'])} fixed, {len(fc['unresolved'])} to look at")
+    en_ok = True
+    if settings.config()["publish"].get("english_subtitles", True):
+        log("translating subtitles into English")
+        en_ok = captions.translate_episode(ep)
+        if not en_ok:
+            log("English translation not available — the video will have Hindi subtitles only")
     eid = _eid(topic["id"])
     ep_path = L.save_episode(eid, {**ep, "_factcheck": fc, "_writer": who})
     d["episodes"][eid] = {"topic_id": topic["id"], "series": ep.get("series"), "created": L.now_iso(), "path": ep_path,
@@ -196,6 +202,8 @@ def make_long(d: dict, slot: datetime | None, upload: bool = True, sample: bool 
         notes_for_you += [f"Fact-check doubt: {u}" for u in fc["unresolved"][:6]]
     if problems:
         notes_for_you += [f"Script note: {p}" for p in problems]
+    if not en_ok:
+        notes_for_you.append("English subtitles could not be made this time (the AI translator did not answer), so this video has Hindi subtitles only.")
     if fc.get("fixed"):
         notes_for_you.append(f"The fact-checker corrected {len(fc['fixed'])} statement(s) automatically (details in {ep_path}).")
     if upload and youtube.ready():
