@@ -1,0 +1,130 @@
+{
+ "month": "2026-12",
+ "created": "2026-11-20T05:24:44+00:00",
+ "order": [
+  "day-nrlm",
+  "irac-npa",
+  "partnership-act-1932",
+  "sukanya-samriddhi",
+  "laf",
+  "rbi-act-1934",
+  "cgtmse",
+  "priority-sector-lending",
+  "day-nulm",
+  "repo-rate",
+  "atal-pension"
+ ],
+ "tips": [
+  {
+   "n": 1,
+   "file": "tip-01",
+   "topic_id": "day-nrlm",
+   "title_en": "Deendayal Antyodaya Yojana – National Rural Livelihoods Mission (DAY-NRLM)",
+   "title_hi": "दीनदयाल अंत्योदय योजना – राष्ट्रीय ग्रामीण आजीविका मिशन",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 2,
+   "file": "tip-02",
+   "topic_id": "irac-npa",
+   "title_en": "Income Recognition and Asset Classification (IRAC) Norms and NPA",
+   "title_hi": "आय मान्यता और परिसंपत्ति वर्गीकरण (IRAC) और NPA",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 3,
+   "file": "tip-03",
+   "topic_id": "partnership-act-1932",
+   "title_en": "Indian Partnership Act, 1932",
+   "title_hi": "भारतीय साझेदारी अधिनियम, 1932",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 4,
+   "file": "tip-04",
+   "topic_id": "sukanya-samriddhi",
+   "title_en": "Sukanya Samriddhi Yojana",
+   "title_hi": "सुकन्या समृद्धि योजना",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 5,
+   "file": "tip-05",
+   "topic_id": "laf",
+   "title_en": "Liquidity Adjustment Facility (LAF) – Repo and Reverse Repo",
+   "title_hi": "तरलता समायोजन सुविधा (LAF)",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 6,
+   "file": "tip-06",
+   "topic_id": "rbi-act-1934",
+   "title_en": "Reserve Bank of India Act, 1934",
+   "title_hi": "भारतीय रिज़र्व बैंक अधिनियम, 1934",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 7,
+   "file": "tip-07",
+   "topic_id": "cgtmse",
+   "title_en": "Credit Guarantee Fund Scheme for Micro and Small Enterprises (CGTMSE)",
+   "title_hi": "सूक्ष्म और लघु उद्यमों के लिए क्रेडिट गारंटी फंड योजना",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 8,
+   "file": "tip-08",
+   "topic_id": "priority-sector-lending",
+   "title_en": "Priority Sector Lending (PSL)",
+   "title_hi": "प्राथमिकता क्षेत्र ऋण",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 9,
+   "file": "tip-09",
+   "topic_id": "day-nulm",
+   "title_en": "Deendayal Antyodaya Yojana – National Urban Livelihoods Mission (DAY-NULM)",
+   "title_hi": "दीनदयाल अंत्योदय योजना – राष्ट्रीय शहरी आजीविका मिशन",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 10,
+   "file": "tip-10",
+   "topic_id": "repo-rate",
+   "title_en": "Repo Rate Explained – How RBI Controls Interest Rates",
+   "title_hi": "रेपो रेट क्या है?",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  },
+  {
+   "n": 11,
+   "file": "tip-11",
+   "topic_id": "atal-pension",
+   "title_en": "Atal Pension Yojana (APY)",
+   "title_hi": "अटल पेंशन योजना",
+   "script_hi": "",
+   "script_en": "",
+   "one_line": ""
+  }
+ ],
+ "used": {}
+}
